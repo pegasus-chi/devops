@@ -8,7 +8,7 @@ baseurl: "/devops"                      # Only required if your site is in a dir
 # SOCIAL PROFILES
 social:
   email: pegasus.chi@outlook.com
-  twitter: 
+  twitter: Pegasus.Chi
   github: pegasus-chi                   # Can also be a github_username/repository
   mastodon: https://mastodon.social/@pegasus-chi
   facebook:                             # A URL
