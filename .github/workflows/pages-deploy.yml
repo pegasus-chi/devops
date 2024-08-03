@@ -26,20 +26,21 @@ jobs:
   github-pages:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 📂 Checkout
         uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
+      - name: 💎 Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with: # https://pages.github.com/versions/
+          ruby-version: '3.1' # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          cache-version: 0 # Increment this number if you need to re-download cached gems
+      - name: 🔨 Install dependencies & build site
+        uses: limjh16/jekyll-action-ts@v2
         with:
-          source: ./
-          destination: ./_site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3          
-      - name: Deploy to GitHub Pages
+          enable_cache: true
+      - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: /github/workspace/./_site
+          publish_dir: ./_site
