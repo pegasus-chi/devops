@@ -26,20 +26,27 @@ jobs:
   github-pages:
     runs-on: ubuntu-latest
     steps:
-      - name: 📂 Checkout
+      - name: 📂 Checkout main branch
         uses: actions/checkout@v4
-      - name: 💎 Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with: # https://pages.github.com/versions/
-          ruby-version: '2.7.4' # Not needed with a .ruby-version file
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically        
-      - name: 🔨 Build site
-        uses: limjh16/jekyll-action-ts@v2
+      - name: 📂 Checkout gh-pages branch
+        uses: actions/checkout@v4
         with:
-          enable_cache: true
+          ref: 'gh-pages'
+          path: 'gh-pages'
+      - name: 🔨 Setup Pages
+        uses: actions/configure-pages@v5      
+      - name: 🔨 Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./gh-pages
+      - name: 🔨 Upload artifact
+        uses: actions/upload-pages-artifact@v3          
       - name: 🚀 Deploy to GitHub Pages
-        id: deployment
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+        run: |
+          cd gh-pages && \
+          git config user.name "Pegasus Chi" && \
+          git config user.email "pegasus.chi@outlook.com" && \
+          git add . && \
+          git commit -m "Jekyll build from action ${GITHUB_SHA}" && \
+          git push
