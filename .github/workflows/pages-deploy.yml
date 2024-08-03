@@ -43,11 +43,15 @@ jobs:
       - name: 🔨 Upload artifact
         uses: actions/upload-pages-artifact@v3          
       - name: 🚀 Deploy to GitHub Pages
-        run: |
-          cd gh-pages && \
-          cp -rf ../_site/* ./ && \
-          git config user.name "Pegasus Chi" && \
-          git config user.email "pegasus.chi@outlook.com" && \
-          git add . && \
-          git commit -m "Jekyll build from action ${GITHUB_SHA}" && \
-          git push
+        #run: |
+        #  cd gh-pages && \
+        #  cp -rf ../_site/* ./ && \
+        #  git config user.name "Pegasus Chi" && \
+        #  git config user.email "pegasus.chi@outlook.com" && \
+        #  git add . && \
+        #  git commit -m "Jekyll build from action ${GITHUB_SHA}" && \
+        #  git push
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
