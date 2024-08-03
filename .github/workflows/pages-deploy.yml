@@ -45,7 +45,7 @@ jobs:
       - name: 🚀 Deploy to GitHub Pages
         run: |
           cd gh-pages && \
-          cp -rf ./_site/* ./ && \
+          cp -rf ../_site/* ./ && \
           git config user.name "Pegasus Chi" && \
           git config user.email "pegasus.chi@outlook.com" && \
           git add . && \
