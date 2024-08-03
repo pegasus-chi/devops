@@ -39,12 +39,13 @@ jobs:
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./
-          destination: ./gh-pages
+          destination: ./_site
       - name: 🔨 Upload artifact
         uses: actions/upload-pages-artifact@v3          
       - name: 🚀 Deploy to GitHub Pages
         run: |
           cd gh-pages && \
+          cp -rf ./_site/* ./ && \
           git config user.name "Pegasus Chi" && \
           git config user.email "pegasus.chi@outlook.com" && \
           git add . && \
