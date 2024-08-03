@@ -31,13 +31,12 @@ jobs:
       - name: 💎 Setup Ruby
         uses: ruby/setup-ruby@v1
         with: # https://pages.github.com/versions/
-          ruby-version: '3.1' # Not needed with a .ruby-version file
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-          cache-version: 0 # Increment this number if you need to re-download cached gems
-      - name: 🔨 Setup Pages
-        uses: actions/configure-pages@v5          
+          ruby-version: '2.7.4' # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically        
       - name: 🔨 Build site
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        uses: limjh16/jekyll-action-ts@v2
+        with:
+          enable_cache: true
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: peaceiris/actions-gh-pages@v4
